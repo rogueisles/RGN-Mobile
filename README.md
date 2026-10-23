@@ -97,7 +97,7 @@ No fork activation settings or daemon services are changed by this app. It uses 
 Requirements: JDK 17, Android SDK platform 35, build-tools 35.0.0, Gradle 8.9 (included wrapper), and Node.js 20+ for tests. Android Gradle Plugin is pinned to 8.7.3. Follow the [official AGP compatibility table](https://developer.android.com/build/releases/agp-8-7-0-release-notes).
 
 ```bash
-git clone https://github.com/rogueisles/OGG-Mobile.git
+git clone https://github.com/rogueisles/RGN-Mobile.git
 cd OGG-Mobile
 # Check out the Rogue Wallet release tag after its source is published.
 export JAVA_HOME=/path/to/jdk-17
