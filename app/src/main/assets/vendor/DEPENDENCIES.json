@@ -1,0 +1,18 @@
+[
+  {
+    "package": "ethers",
+    "version": "5.8.0",
+    "source": "https://registry.npmjs.org/ethers/-/ethers-5.8.0.tgz",
+    "integrity": "sha512-DUq+7fHrCg1aPDFCHx6UIPb3nmt2XMpM7Y/g2gLhsl3lIBqeAfOJIl1qEvRf2uq3BiKxmh6Fh5pfp2ieyek7Kg==",
+    "file": "ethers-5.8.0.min.js",
+    "sha256": "755f1f8a4cdd8c63056e2fa2f1e44e16c82eface12eb1afe71306333601953ac"
+  },
+  {
+    "package": "qrcode-generator",
+    "version": "1.4.4",
+    "source": "https://registry.npmjs.org/qrcode-generator/-/qrcode-generator-1.4.4.tgz",
+    "integrity": "sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==",
+    "file": "qrcode-1.4.4.js",
+    "sha256": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780"
+  }
+]

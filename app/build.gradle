@@ -1,14 +1,40 @@
 plugins { id 'com.android.application' }
 
 android {
-    namespace 'org.oggcoin.wallet'
+    namespace 'com.rogueisles.wallet'
     compileSdk 35
 
     defaultConfig {
-        applicationId 'org.oggcoin.wallet'
+        applicationId 'com.rogueisles.wallet'
         minSdk 24
         targetSdk 35
-        versionCode 10
-        versionName '1.0.0'
+        versionCode 30000
+        versionName '3.0.0'
+    }
+    buildToolsVersion '35.0.0'
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    def signingPath = System.getenv('ROGUE_SIGNING_PROPERTIES')
+    if (signingPath) {
+        def keys = new Properties()
+        file(signingPath).withInputStream { keys.load(it) }
+        signingConfigs {
+            production {
+                storeFile file(keys['storeFile'])
+                storePassword keys['storePassword']
+                keyAlias keys['keyAlias']
+                keyPassword keys['keyPassword']
+            }
+        }
+        buildTypes.release.signingConfig = signingConfigs.production
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+        }
     }
 }

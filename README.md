@@ -1,183 +1,158 @@
-<p align="center">
-  <img src="docs/logo.png" width="130" alt="OGG Master Tool" />
-</p>
+# Rogue Wallet
 
-<h1 align="center">Master Tool — OGG Mobile Wallet</h1>
+<img src="app/src/main/assets/rogue-icon.png" width="96" alt="Rogue Network logo">
 
-<p align="center">
-  <b>Wallet · Swap · Bridge · Stake · Govern</b><br/>
-  The official Android Master Tool for Oggchain (OGG).
-</p>
+**Your keys. Your horizon.** A self-custody Android wallet for Rogue Network (RGN), with BNB Smart Chain support, Deepwater swaps and bridging, and the existing RGN staking contract.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/platform-Android-3ddc84" alt="Android" />
-  <img src="https://img.shields.io/badge/chain-Oggchain%20(70088)-f8a62d" alt="Oggchain" />
-  <img src="https://img.shields.io/badge/BSC-bridge-F3BA2F" alt="BSC" />
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT" />
-  <img src="https://img.shields.io/badge/self--custody-yes-3dd68c" alt="Self-custody" />
-</p>
+This is the redesigned successor to OGG Mobile. It uses a **new Android application ID and a new signing certificate**, because the old release key was unavailable. It installs alongside the old app and cannot read the old app’s encrypted storage. It does **not** replace the old app in place.
 
----
+## Install on Android
 
-## 🪨 What is this?
+1. Download `Rogue-Wallet-3.0.0-android.apk` and `SHA256SUMS` from the release assets.
+2. Check the APK checksum before installing. On Linux: `sha256sum Rogue-Wallet-3.0.0-android.apk`; on macOS: `shasum -a 256 Rogue-Wallet-3.0.0-android.apk`; on Windows PowerShell: `Get-FileHash .\Rogue-Wallet-3.0.0-android.apk -Algorithm SHA256`. Compare the result with the APK line in `SHA256SUMS`.
+3. Open the APK on your phone. If prompted, permit installation from the browser/file manager you used. Restrict that permission again afterward if you wish.
+4. Create a wallet and back up its private key offline, or import an existing key/standard Ethereum recovery phrase.
+5. Verify your public address and network before receiving funds. Start with a small amount.
 
-**Master Tool** is the official self-custody mobile wallet for the **Oggchain** network (Chain ID `70088`). It puts everything the chain offers into one clean Android app — no Termux, no browser extension, no command line, no third-party custody.
+The `.aab` asset is for Android store distribution; it is not installed directly like an APK.
 
-Your keys are generated and encrypted **on your device** with your own password and never leave it. Create a wallet, hold OGG across two chains, swap on CaveSwap, bridge OGG to and from BNB Smart Chain, stake, and take part in Tribe governance — all from one cave.
+### Moving from OGG Mobile
 
-> Rock turns into digital copper. Tribe strong. Mine. Stake. Build. Repeat.
+Keep the old app installed. Use its existing export feature to back up your private key privately, then import it into Rogue Wallet. Confirm the **full public address** matches, then check your balance on the correct network. Existing RGN funds, wrapped tokens and staking positions remain at the same addresses/contracts; they do not need to be sent to a new chain. Do not uninstall the old app until your backup and new wallet have been verified. Never share that key or recovery phrase with support or upload it to GitHub.
 
-<p align="center">
-  <img src="docs/screen-splash.png" width="220" alt="Home" />
-  <img src="docs/screen-wallet.png" width="220" alt="Wallet" />
-  <img src="docs/screen-swap.png" width="220" alt="Swap" />
-</p>
-<p align="center">
-  <img src="docs/screen-bridge.png" width="220" alt="Bridge" />
-  <img src="docs/screen-tribe.png" width="220" alt="Tribe governance" />
-</p>
+## Features
 
----
+| Area | Included |
+|---|---|
+| Wallet | Create/import, multiple encrypted wallets, send native coins and tokens, gas-aware Max, copy address and receive QR |
+| Networks | Rogue Network (70088) and BNB Smart Chain (56); separate per-network balances |
+| Tokens | RGN, wRGN, BNB, RGN (Legacy OGG) on BSC and USDT on BSC; add/remove custom token listings |
+| Staking | Read position and pool stats; stake, start unstaking cooldown, claim, withdraw when allowed by the contract |
+| Deepwater | Native RGN ↔ wRGN wrapping, router swaps, explicit approvals, slippage minimum output and price-impact estimate |
+| Bridge | Both RGN/BSC directions; destination capacity checks; restart-persistent source/delivery records; optional, explicitly confirmed unwrap after incoming delivery |
+| Appearance | Light by default, optional remembered dark mode; compact and large phone layouts; reduced-motion support |
 
-## ✨ Features
+**Tribe Pool and governance are removed.** No proposal/vote/finalize UI or governance transaction code is shipped. Solana/SPL is not supported by this Android release. A BSC yellow ring and “Legacy OGG” label distinguish the existing BSC token. Display aliases do not rename deployed contracts.
 
-### 👛 Multi-chain wallet
-- One address, two networks: **Oggchain** and **BNB Smart Chain**
-- Default assets shown out of the box: **OGG**, **wOGG**, **BNB**, **OGG (BSC)**, **USDT (BSC)**
-- Add any custom token on either chain — paste a contract address and the app reads its name, symbol and decimals straight from the chain
-- Send native coins or tokens on either network, with an amount slider and a gas-aware **Max**
-- Multiple wallets on one device, each encrypted with its own password — switch between them or add more any time
+![Rogue Wallet light and dark phone-width previews](docs/screenshots/Rogue-Wallet-Phone-Preview.png)
 
-### 🔄 Swap (CaveSwap)
-- Swap tokens on Oggchain through the CaveSwap router
-- Live quotes, exchange rate, minimum received, and a price-impact warning
-- Adjustable slippage
-- **OGG ⇄ wOGG** 1:1 wrap / unwrap
-- One-time token approvals handled automatically
-- Swap only — no liquidity management in the app
+Design review using a keyless sample address at compact and large phone widths. These are browser previews of the packaged UI, not physical-device test results.
 
-### 🌉 Bridge (OGG ⇄ BSC)
-- Move OGG between Oggchain and BNB Smart Chain **1:1** (burn & mint)
-- Bridge OGG or wOGG out; OGG (BSC) back in
-- Auto-wrap on the way out, auto-unwrap on arrival
-- Live destination-capacity check — the app never lets you send more than the destination can mint in the current window
-- Persistent bridge history with source and destination explorer links
+## Using the wallet
 
-### ⭐ Staking
-- Stake and unstake OGG, track your position and pool share
-- Watch your cooldown timer and withdraw once it ends
-- Claim staking rewards
-- Live pool stats: total staked, reward pool, estimated APR, and contract minimums
+**Send:** select the network and asset, enter the recipient and amount, then review the full recipient, chain ID, maximum gas fee and nonce. Nothing is signed or broadcast before confirmation. Native gas is required on the source network, including for token transfers. Max keeps a conservative reserve; the final estimate is checked again.
 
-### 🏛️ Tribe governance
-- View the Tribe treasury and proposal activity
-- Create proposals, vote yes / no, and finalize after the voting period
-- See exactly how much stake is needed to propose
+**Receive:** choose the correct network, then use the public address or QR. The address can be the same on both EVM networks, but balances are separate. Sending a token on the wrong chain does not move it to RGN.
 
-### 🔒 Security & experience
-- **Self-custody** — keys are encrypted locally (PBKDF2 + AES-GCM) and never uploaded
-- A clear confirmation screen before every swap, bridge and send
-- Log out to lock the app back to the wallet list without erasing your keys
-- Warm cave-lit theme in your choice of **light or dark**
+**Stake:** the screen reads the existing contract rather than changing its rules. Contract minimums, cooldown and withdrawal eligibility are enforced by contract calls and gas estimation. No fixed APR is promised. The old hard-coded APR assumption has been removed.
 
----
+**Swap:** choose two Rogue Network assets. Review the quote, minimum received, slippage and price impact. Token approvals are exact amounts; an existing non-zero insufficient allowance is reset first. Each approval and each swap requires a separate confirmation. Swaps use the deployed router’s original ABI names, including `swapExactOGGForTokens`; these must not be renamed as part of branding.
 
-## 📥 Install
+**Bridge:** choose direction and native/wrapped asset. Outbound native RGN is wrapped first, with a separate confirmation. The bridge transaction is then reviewed separately. If wrapping confirms but bridging is cancelled, the wRGN remains in your wallet: select wRGN to continue. Incoming transfers settle as wrapped tokens; a separate confirmed unwrap can turn them into native RGN, with RGN required for gas. Capacity is checked on the destination; it does not prove relayer availability or guarantee a delivery time. The wallet does not run the bridge relayer.
 
-Download the latest **`Master-Tool.apk`** from the [Releases](../../releases) page, open it on your Android phone, and allow installation from your browser or file manager when prompted.
+### Pending transactions and recovery
 
-Requirements: **Android 7.0 (API 24) or newer**.
+The exact signed transaction hash is saved before broadcasting. A network timeout is **uncertain**, not proof of failure. The app never automatically resends or silently creates a replacement. Check Activity and the explorer before retrying. Reopen/unlock the same wallet to recover receipt status. Activity lists transactions initiated by this app; the explorer provides full chain history.
 
-> ⚠️ **Back up your private key.** This is a self-custody wallet. If you lose your private key, no one — including the Oggchain team — can recover your funds. Export and store it somewhere safe before moving real value.
+Bridge delivery requires the destination event to match the **source transaction hash, recipient and exact amount**, with at least three destination confirmations. Destination log scans resume in bounded batches. An old or slow transfer stays awaiting delivery; a timeout is not relabelled as a failed bridge. If source execution reverts, that is reported separately. Large backlogs can take multiple refresh cycles to scan.
 
----
+## Android compatibility
 
-## 🌐 Network
+- Minimum Android **7.0 / API 24**, target/compile API **35**.
+- No native CPU-specific libraries: one APK supports supported 32-bit and 64-bit Android architectures without separate downloads.
+- Layouts designed for 360px-class compact phones and 412px-class larger phones, including the screen classes used by Galaxy S8 and Galaxy S23+.
+- Keep **Android System WebView / Chrome updated**. The phone’s supported OS and WebView determine available browser/cryptography features; no claim is made that every original factory WebView works.
+- No camera, contacts, storage, location or microphone permissions. Receive QR is generated locally. Camera-based QR scanning and biometric unlocking are not included.
+- Low-overhead HTML/CSS interface, local assets and fonts, asynchronous native RPC transport, no looping decorative video or remote signing-code CDN.
 
-| Item        | Value                          |
-| ----------- | ------------------------------ |
-| Chain       | Oggchain                       |
-| Coin        | Oggcoin (OGG)                  |
-| Symbol      | OGG                            |
-| Chain ID    | 70088                          |
-| RPC         | https://rpc.oggchain.com       |
-| Explorer    | https://scan.oggchain.com      |
-| Consensus   | ProgPoW (hybrid PoW / PoS)     |
+Physical S8/S23+ device tests and funded send/stake/swap/bridge settlement checks must be recorded before calling a public release fully qualified. Build and automated/read-only results are in `docs/VALIDATION.md`.
 
-### Core contracts
+## Network and contracts
 
-| Contract              | Address                                      |
-| --------------------- | -------------------------------------------- |
-| Staking               | `0xa47008c59f729756bEc7d01f6FE71328A242d0c4` |
-| Tribe Pool            | `0x085CF5da09842FA3BA01068CC02c156198b1b114` |
-| CaveSwap Router       | `0x63bF06B97B6764699715A1421F65F5DBdED54008` |
-| CaveSwap Factory      | `0xeDD3931022b29F1d2EB226E978A775eE05891866` |
-| wOGG                  | `0x481c52Fc0394943d3A1190e5121F63a67C072ABb` |
-| Bridge (Oggchain)     | `0x9C86C959dbfD0FFe997fceF3c4b307c1a9AcFc8A` |
-| Bridge (BSC)          | `0xb448CE16ec19882556Bea1171cA8D02774a5E49E` |
-| OGG on BSC            | `0xC44Efba271E71351CE20F96cFAc2d1d5c2302Aa3` |
+| Setting | Value |
+|---|---|
+| Name / symbol | Rogue Network / RGN |
+| Chain ID | 70088 |
+| RPC | https://rpc.rogueisles.com |
+| Explorer | https://scan.rogueisles.com |
+| Deepwater | https://swap.rogueisles.com |
+| Atlas | https://rogueisles.com/atlas/ |
+| BSC RPC | https://bsc-dataseed.binance.org |
+| BSC explorer | https://bscscan.com |
 
----
+| Contract | Existing address |
+|---|---|
+| Staking | `0xa47008c59f729756bEc7d01f6FE71328A242d0c4` |
+| Router | `0x63bF06B97B6764699715A1421F65F5DBdED54008` |
+| Factory | `0xeDD3931022b29F1d2EB226E978A775eE05891866` |
+| Wrapped RGN (on-chain wOGG) | `0x481c52Fc0394943d3A1190e5121F63a67C072ABb` |
+| RGN-side bridge | `0x9C86C959dbfD0FFe997fceF3c4b307c1a9AcFc8A` |
+| BSC-side bridge | `0xb448CE16ec19882556Bea1171cA8D02774a5E49E` |
+| RGN (Legacy OGG) on BSC | `0xC44Efba271E71351CE20F96cFAc2d1d5c2302Aa3` |
 
-## 🛠️ Build from source
+No fork activation settings or daemon services are changed by this app. It uses the existing network and deployed contracts.
 
-The app is a native Android shell around a self-contained web UI. Transactions are signed on-device with **ethers.js**; a small Java bridge relays JSON-RPC calls so the wallet works without a browser extension.
+## Build locally — GitHub Actions is optional
 
-You need the **Android SDK** and **JDK 17**.
+Requirements: JDK 17, Android SDK platform 35, build-tools 35.0.0, Gradle 8.9 (included wrapper), and Node.js 20+ for tests. Android Gradle Plugin is pinned to 8.7.3. Follow the [official AGP compatibility table](https://developer.android.com/build/releases/agp-8-7-0-release-notes).
 
 ```bash
-# clone
-git clone https://github.com/Oggchain/OGG-Mobile.git
+git clone https://github.com/rogueisles/OGG-Mobile.git
 cd OGG-Mobile
-
-# build a debug APK
-gradle assembleDebug
-# output: app/build/outputs/apk/debug/app-debug.apk
+# Check out the Rogue Wallet release tag after its source is published.
+export JAVA_HOME=/path/to/jdk-17
+export ANDROID_HOME=/path/to/android-sdk
+node --test tests/core.test.cjs tests/signing.test.cjs
+./gradlew --no-daemon assembleDebug lintRelease
 ```
 
-The included GitHub Actions workflow (`.github/workflows/build-apk.yml`) builds the APK on every push to `main` and uploads it as an artifact.
+On Windows, use `gradlew.bat` and set environment variables using PowerShell. Gradle can use `sdk.dir` in an untracked `local.properties` file. The wrapper distribution SHA-256 is pinned in `gradle/wrapper/gradle-wrapper.properties`.
 
-### Project structure
+### Sign your own release
 
-```
-OGG-Mobile/
-├── app/
-│   └── src/main/
-│       ├── java/org/oggcoin/wallet/
-│       │   └── MainActivity.java     # Android shell + JSON-RPC bridge
-│       ├── assets/
-│       │   ├── index.html            # the full wallet UI (HTML/CSS/JS + ethers.js)
-│       │   ├── ogg-head.png          # app / header logo
-│       │   └── ogg-coin.png          # OGG coin icon
-│       ├── res/                      # launcher icons, theme, strings
-│       └── AndroidManifest.xml
-├── .github/workflows/build-apk.yml   # CI build
-├── docs/                             # README images
-└── README.md
+Keep the production signing keystore **outside the public repository**. Set `ROGUE_SIGNING_PROPERTIES` to an absolute private properties file containing:
+
+```properties
+storeFile=/private/path/rogue-wallet-release.jks
+storePassword=YOUR_PRIVATE_STORE_PASSWORD
+keyAlias=rogue-wallet
+keyPassword=YOUR_PRIVATE_KEY_PASSWORD
 ```
 
----
+Then build:
 
-## 🔐 Security
+```bash
+export ROGUE_SIGNING_PROPERTIES=/private/path/release-signing.properties
+./gradlew --no-daemon assembleRelease bundleRelease lintRelease
+# APK: app/build/outputs/apk/release/app-release.apk
+# AAB: app/build/outputs/bundle/release/app-release.aab
+```
 
-- **Self-custody.** Private keys are encrypted with your password (PBKDF2, 150k iterations → AES-GCM) and stored only on your device. They are never transmitted anywhere.
-- **Back up your keys.** If you lose your password or your device, your wallet cannot be recovered by anyone. Export and safely store your private key.
-- **Verify your download.** Only install builds from the official [Releases](../../releases) page.
-- **Found a vulnerability?** Please report it responsibly rather than opening a public issue.
+Without signing configuration, a release build is unsigned. Debug builds use the development key and are not production updates. Back up the release key and passwords privately: future updates for `com.rogueisles.wallet` must retain this certificate and increase versionCode. Never upload the keystore, its passwords, `local.properties`, user wallets or private keys in a source release.
 
----
+## Security design and limitations
 
-## 🤝 Contributing
+- Local PBKDF2-SHA256 (600,000 iterations) and AES-256-GCM for new encrypted keys; tested decryption compatibility with legacy 150,000-iteration keystores. Storage is app-local; loss of the password and offline backup can make funds unrecoverable.
+- The packaged UI is served on an isolated local HTTPS origin. Remote pages never enter the wallet WebView. External links open in the system browser and the wallet locks on backgrounding.
+- Native RPC allows only the two configured HTTPS endpoints and the wallet’s required RPC methods, rejects redirects and limits responses. Chain ID is verified against the actual RPC before signing.
+- No JavaScript CDN or analytics; pinned vendored dependencies with recorded integrity hashes and licenses. No automatic Android backups; release WebView debugging disabled; Android screenshots/recordings blocked.
+- Private key export requires password re-entry and disappears after 30 seconds. Android sensitive clipboard content is marked and cleared after 60 seconds if unchanged. Other apps/keyboard/OS compromise can still expose secrets. A rooted, malicious or compromised phone is outside these protections.
+- Transactions and public addresses necessarily reach the configured RPC services. This is self-custody, not anonymity, a hardware wallet or a security audit.
+- Do not run the development web preview as a public hosted wallet. The supported artifact is the packaged Android app.
 
-Issues and pull requests are welcome. If you're building on Oggchain or want to improve the wallet, open an issue to start the conversation.
+## Source structure
 
-## 📜 License
+```text
+app/src/main/java/com/rogueisles/wallet/MainActivity.java  Android shell and restricted async RPC
+app/src/main/assets/index.html                          Packaged document and CSP
+app/src/main/assets/wallet.css                          Responsive light/dark interface
+app/src/main/assets/wallet.js                           Wallet, staking, swap and bridge flows
+app/src/main/assets/core.js                             Network/contracts, validation, crypto helpers
+app/src/main/assets/vendor/                             Pinned ethers/QR code and licenses
+tests/                                                 Offline crypto/signing/recovery tests
+docs/                                                  Validation and release guidance
+```
 
-Released under the [MIT License](LICENSE).
+## License
 
----
-
-<p align="center">
-  <b>Tribe strong. Mine. Stake. Build. Repeat.</b> 🦣<br/>
-  Oggchain · Chain ID 70088
-</p>
+[MIT](LICENSE). Original OGG Mobile attribution is retained. Vendored dependencies retain their own licenses in `app/src/main/assets/vendor/`.
